@@ -3,10 +3,13 @@ class Jatekter {
     #lepes;
     #objektumLISTA = [];
     #jelenlegiAllapot = [];
+    #kezdoAllapot = [];
     constructor() {
 
         this.#lepes = 0;
         const szuloELEM = $(".jatekTer");
+        this.#kezdoAllapot = ["♙", "♙", "♙", " ", " ", " ", "♟", "♟", "♟"];
+
         this.#jelenlegiAllapot = ["♙", "♙", "♙", " ", " ", " ", "♟", "♟", "♟"];
 
         for (let index = 0; index < 9; index++) {
@@ -15,33 +18,86 @@ class Jatekter {
             this.#objektumLISTA.push(elem);
         }
 
-        $(window).on("kattintasKockara", (event) => { 
+        $(window).on("kattintasKockara", (event) => {
             console.log(this.#jelenlegiAllapot);
-            console.log();
-            /**2 - ha gyalog van benne, akkor eltűnik belőle a bábu, amennyiben az tud lépni. */
+            // 0 1 2 
+            // 3 4 5 
+            // 6 7 8
+
             if (this.#jelenlegiAllapot[event.detail.index] == "♙") {
                 console.log("Első feltétel");
 
-               
-                //console.log(this.#jelenlegiAllapot[event.detail.index]);
-                //console.log(this.#objektumLISTA[event.detail.index]);
+                if (this.#jelenlegiAllapot[event.detail.index + 3] == " "
+                    || this.#jelenlegiAllapot[event.detail.index + 4] == "♟"
+                    || this.#jelenlegiAllapot[event.detail.index + 2] == "♟"
+                ) {
+                    console.log("Ha üres a léphető mező");
 
-                this.#jelenlegiAllapot[event.detail.index] = " ";
-                //console.log(this.#jelenlegiAllapot[event.detail.index]);
+                    /* //console.log(this.#jelenlegiAllapot[event.detail.index]);
+                    //console.log(this.#objektumLISTA[event.detail.index]);
+                    this.#jelenlegiAllapot[event.detail.index] = " ";
+                    //console.log(this.#jelenlegiAllapot[event.detail.index]);
+                    this.#objektumLISTA[event.detail.index].benne = " ";
+                    //console.log(this.#objektumLISTA[event.detail.index]);
+                    this.#objektumLISTA[event.detail.index].setElem(" "); */
 
-                this.#objektumLISTA[event.detail.index].benne= " ";
-                //console.log(this.#objektumLISTA[event.detail.index]);
+                    this.#cellaUritese();
+                    $(window).on("kattintasKockara", (event) => {
+                        if (this.#jelenlegiAllapot[event.detail.index] == " "
+                        || this.#jelenlegiAllapot[event.detail.index] == "♟") {                            
+                            this.#cellaFeltoltese("♙");
 
-                this.#objektumLISTA[event.detail.index].setElem(" ");
-                
-                this.#lepes++;
+                        }
+                    })
 
-            }else if(this.#jelenlegiAllapot[event.detail.index] == "♟"){
+                    this.#lepes++;
+                }
+            } else if (this.#jelenlegiAllapot[event.detail.index] == "♟") {
                 console.log("Második feltétel");
 
-                this.#lepes++;
+
+                if (this.#jelenlegiAllapot[event.detail.index - 3] == " "
+                    || this.#jelenlegiAllapot[event.detail.index - 2] == "♙"
+                    || this.#jelenlegiAllapot[event.detail.index - 2] == "♙"
+                ) {
+                    console.log("Ha üres a léphető mező")
+
+                    /* this.#jelenlegiAllapot[event.detail.index] = " ";
+                    this.#objektumLISTA[event.detail.index].benne = " ";
+                    this.#objektumLISTA[event.detail.index].setElem(" "); */
+                    this.#cellaUritese();
+                    $(window).on("kattintasKockara", (event) => {
+                        if (this.#jelenlegiAllapot[event.detail.index] == " "
+                        || this.#jelenlegiAllapot[event.detail.index] == "♙") {     
+                            this.#cellaUritese();
+                            this.#cellaFeltoltese("♟");
+
+                        }
+                    })
+                    this.#lepes++;
+                }
             }
         })
+
+
+        /* let resetGomb = $(".resetGomb");
+        
+        resetGomb.on("click", ()=>{
+            console.log("reset gobm kattintható")
+            //reset
+        }) */
+    }
+
+    #cellaUritese() {
+        this.#jelenlegiAllapot[event.detail.index] = " ";
+        this.#objektumLISTA[event.detail.index].benne = " ";
+        this.#objektumLISTA[event.detail.index].setElem(" ");
+    }
+    #cellaFeltoltese(babu) {
+        this.#jelenlegiAllapot[event.detail.index] = babu;
+        this.#objektumLISTA[event.detail.index].benne = babu;
+        this.#objektumLISTA[event.detail.index].setElem(babu);
+
     }
 }
 export default Jatekter;
