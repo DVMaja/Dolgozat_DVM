@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    padding-bottom: 20px;
+}
+
+main {
+    margin: auto;
+    width: 80%;
+}
+
+.jatekTer {
+    display: grid;
+    grid-template-columns: 70px 70px 70px;
+    grid-template-rows: 70px 70px 70px;
+}
+
+.divELEM {
+    border: 2px solid black;
+}
+
+.babu {
+    font-size: 50px;
+    text-align: center;
+}
