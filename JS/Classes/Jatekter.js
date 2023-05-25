@@ -24,7 +24,7 @@ class Jatekter {
             // 3 4 5 
             // 6 7 8
 
-            if (this.#jelenlegiAllapot[event.detail.index] == "♙") {
+            if (this.#lepes% 2 == 0 && this.#jelenlegiAllapot[event.detail.index] == "♙") {
                 console.log("Első feltétel");
 
                 if (this.#jelenlegiAllapot[event.detail.index + 3] == " "
@@ -51,14 +51,15 @@ class Jatekter {
                     })
 
                     this.#lepes++;
+                    console.log(this.#lepes);
                 }
-            } else if (this.#jelenlegiAllapot[event.detail.index] == "♟") {
+            } else if (this.#lepes% 2 == 0 && this.#jelenlegiAllapot[event.detail.index] == "♟") {
                 console.log("Második feltétel");
 
 
-                if (this.#jelenlegiAllapot[event.detail.index - 3] == " "
+                if ((this.#jelenlegiAllapot[event.detail.index - 3] == " "
                     || this.#jelenlegiAllapot[event.detail.index - 2] == "♙"
-                    || this.#jelenlegiAllapot[event.detail.index - 2] == "♙"
+                    || this.#jelenlegiAllapot[event.detail.index - 2] == "♙")
                 ) {
                     console.log("Ha üres a léphető mező")
 
@@ -75,6 +76,7 @@ class Jatekter {
                         }
                     })
                     this.#lepes++;
+                    console.log(this.#lepes);
                 }
             }
         })
