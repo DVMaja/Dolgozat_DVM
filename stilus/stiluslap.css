@@ -21,9 +21,7 @@ main {
 
 .divELEM {
     border: 2px solid black;
-}
-
-.babu {
+    /*background-color: blueviolet;*/
     font-size: 50px;
     text-align: center;
 }
